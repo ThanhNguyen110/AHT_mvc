@@ -2,59 +2,68 @@
 
 namespace App\Models;
 
-use App\Config\Database;
 use App\Core\Model;
 
 class Task extends Model
 {
-    public function create($title, $description)
+    protected $id;
+    protected $title;
+    protected $description;
+    protected $created_at;
+    protected $updated_at;
+
+    //ID
+    public function getId()
     {
-        $sql = "INSERT INTO tasks (title, description, created_at, updated_at) VALUES (:title, :description, :created_at, :updated_at)";
-
-        $req = Database::getBdd()->prepare($sql);
-
-        return $req->execute([
-            'title' => $title,
-            'description' => $description,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
+        return $this->id;
     }
 
-    public function showTask($id)
+    public function setId($id)
     {
-        $sql = "SELECT * FROM tasks WHERE id =" . $id;
-        $req = Database::getBdd()->prepare($sql);
-        $req->execute();
-        return $req->fetch();
+        $this->id = $id;
     }
 
-    public function showAllTasks()
+    //Title
+    public function getTitle()
     {
-        $sql = "SELECT * FROM tasks";
-        $req = Database::getBdd()->prepare($sql);
-        $req->execute();
-        return $req->fetchAll();
+        return $this->title;
     }
 
-    public function edit($id, $title, $description)
+    public function setTitle($title)
     {
-        $sql = "UPDATE tasks SET title = :title, description = :description , updated_at = :updated_at WHERE id = :id";
-
-        $req = Database::getBdd()->prepare($sql);
-
-        return $req->execute([
-            'id' => $id,
-            'title' => $title,
-            'description' => $description,
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
+        $this->title = $title;
     }
 
-    public function delete($id)
+    //Description
+    public function getDescription()
     {
-        $sql = 'DELETE FROM tasks WHERE id = ?';
-        $req = Database::getBdd()->prepare($sql);
-        return $req->execute([$id]);
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    //Created_at
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    //Updated_at
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
     }
 }

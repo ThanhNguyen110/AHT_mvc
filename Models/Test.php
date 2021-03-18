@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class TaskModel extends Model
+class Test extends Model
 {
     protected $id;
     protected $title;

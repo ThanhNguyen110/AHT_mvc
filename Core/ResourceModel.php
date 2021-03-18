@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Config\Database;
+
 class ResourceModel implements ResourceModelInterface
 {
     protected $table;
@@ -41,7 +43,6 @@ class ResourceModel implements ResourceModelInterface
             $sql .= " VALUES(" . $str_value . ")";
 
             $req = Database::getBdd()->prepare($sql);
-
             return $req->execute($arr_atr);
         } else {
             //If id != null, update model
@@ -66,7 +67,7 @@ class ResourceModel implements ResourceModelInterface
 
     public function delete($id)
     {
-        $sql = 'DELETE FROM $this->table WHERE id = ?';
+        $sql = "DELETE FROM $this->table WHERE id = $id";
         $req = Database::getBdd()->prepare($sql);
         return $req->execute([$id]);
     }

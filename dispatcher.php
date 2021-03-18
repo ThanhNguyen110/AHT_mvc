@@ -23,9 +23,7 @@ class Dispatcher
     public function loadController()
     {
         $name = ucfirst($this->request->controller) . "Controller";
-        //$file = ROOT . 'Controllers/' . $name . '.php';  
         $file = 'App\\Controllers\\' . $name;
-        //require($file);
         $controller = new $file();
         return $controller;
     }

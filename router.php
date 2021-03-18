@@ -4,13 +4,12 @@ namespace App;
 
 class Router
 {
-
     static public function parse($url, $request)
     {
         $url = trim($url);
 
         if ($url == "/MVC_todo/") {
-            $request->controller = "tasks";
+            $request->controller = "tests";
             $request->action = "index";
             $request->params = [];
         } else {
